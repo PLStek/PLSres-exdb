@@ -1,0 +1,10 @@
+title: Le langage C
+subtitle: Référence rapide du langage
+relevantCourses: [IF2, LO21, LP25]
+themeColor: [153, 102, 255]
+sections:
+    - introduction
+    - reference
+    - stdlib
+    - advanced
+    - compilation

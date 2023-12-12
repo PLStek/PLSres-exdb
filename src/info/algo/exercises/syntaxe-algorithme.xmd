@@ -1,0 +1,148 @@
+::exercise syntaxe-algorithme
+::title Façons d'écrire les algorithmes
+::tags algorithme
+::courses IF2 LO21
+::source PL$tek
+::question type=choices difficulty=1
+	::text
+		Lesquelles de ces représentations décrivent un algorithme ? Situez le niveau d'abstraction et l'objectif potentiel de chacune.
+	::choice false
+		::text
+			Le tri rapide est un algorithme de tri utilisant l'approche *diviser pour régner*
+		::answer
+			Ce n'est pas un algorithme : ça explique vaguement le principe, mais pas assez pour en sortir quoi que ce soit de précis (en fait plusieurs algos utilisent cette approche). C'est bien pour présenter vite fait l'idée mais il n'y a pas grand chose de plus à en tirer.
+	::choice both
+		::text
+			Le tri rapide organise les éléments à gauche et à droite d'une valeur pivot, et organise récursivement ces sections gauche et droite jusqu'à atteindre les éléments individuels.
+		::answer
+			C'est peut-être sujet à débat, mais il y a assez de détails ici pour en tirer quelque chose de clair. Comme c'est très abstrait ça n'aide pas des masses pour l'implémentation, mais ça explique sans trop d’ambiguïté le fonctionnement de l'algorithme.
+	::choice true
+		::text
+			- La valeur pivot est le premier élément du tableau
+			- Construire un tableau avec les éléments inférieurs à la valeur pivot, puis la valeur pivot, et enfin les éléments supérieurs
+			- Rappeler récursivement le tri rapide sur les sections à gauche et à droite du pivot
+		::answer
+			C'est un algorithme sous forme relativement abstraite, sous forme d'une simple liste d'instructions à suivre. C'est bien pour expliquer clairement le fonctionnement de l'algorithme sans trop de préjugés sur la cible.
+	::choice true
+		::text
+			```
+			triRapide(tableau, indexDébut, indexFin):
+				Si indexFin - indexDébut > 1:
+					pivot <- tableau[indexFin-1]
+					indexPivot <- indexDébut - 1
+					Pour i allant de indexDébut à indexFin-2:
+						Si tableau[i] <= pivot:
+							indexPivot <- indexPivot + 1
+							échanger tableau[indexPivot] avec indexPivot[i]
+					indexPivot <- indexPivot + 1
+					échanger tableau[indexPivot] avec tableau[indexFin-1]
+					triRapide(tableau, indexDébut, indexPivot)
+					triRapide(tableau, indexPivot+1, indexFin)```
+		::answer
+			Cette fois on est sous une forme plus formelle — les instructions exactes restent hors des pures considérations d'implémentation (comme les swaps par exemple), mais on a là quelque chose de traductible presque ligne par ligne dans un langage impératif quelconque. C'est bien pour montrer et expliquer l'algorithme de façon générique mais exacte. Remarquez qu'il n'y a encore aucune considération de typage.
+	::choice true
+		::text
+			```
+			Fonction échanger(tableau: tableau d'entiers, i: index entier, j: index entier)
+			Variables:
+				Soit temp un entier
+			Contrat:
+				Préconditions:
+					0 <= i < taille(tableau)
+					0 <= j < taille(tableau)
+				Postconditions:
+					tableau[i] == tableau[j:initial]
+					tableau[j] == tableau[i:initial]
+			Algorithme:
+				temp := tableau[i]
+				tableau[i] := tableau[j]
+				tableau[j] := temp
+
+			Fonction partitionner(tableau: tableau d'entiers, début: entier, fin: entier) -> indexPivot: entier
+			Variables:
+				Soit pivot un entier
+				Soit indexPivot un index de tableau entier
+				Soit i un compteur de boucle entier
+			Contrat:
+				Préconditions:
+					début < fin
+					début >= 0
+					fin < taille(tableau)
+				Postconditions:
+					Pour tout i < indexPivot, tableau[i] <= tableau[indexPivot]
+					Pour tout j > indexPivot, tableau[j] >= tableau[indexPivot]
+			Algorithme:
+				pivot := tableau[fin-1]
+				indexPivot := début - 1
+				Pour i allant de début à fin-2:
+					Si tableau[i] <= pivot:
+						indexPivot := indexPivot + 1
+						échanger(tableau, indexPivot, i)
+				indexPivot := indexPivot + 1
+				échanger(tableau, indexPivot, fin-1)
+
+			Fonction triRapide(tableau: tableau d'entiers, début: entier, fin: entier)
+			Variables:
+				Soit indexPivot un entier
+			Contrat:
+				Préconditions:
+					début <= fin
+					début >= 0
+					fin < taille(tableau)
+				Postconditions:
+					Pour tous i, j appartenant à [début, fin[, i <= j => tableau[i] <= tableau[j]
+			Algorithme:
+				Si fin - début > 1:
+					indexPivot := partitionner(tableau, début, fin)
+					triRapide(tableau, début, indexPivot)
+					triRapide(tableau, indexPivot+1, fin)```
+		::answer
+			On a ici une représentation extrêmement formelle, qui est clairement un document de conception. On a tout le typage, un découpage complet de l'implémentation, des structures qui imposent clairement le langage cible, et même des éléments de programmation par contrat pour préfigurer les conditions d'utilisation et les tests unitaires. Même si c'est très intéressant, ce type de doc peut être fastidieux à produire, avec des lourds inconvénients (pas exécutable donc pas vérifiable, pas testable, pas chronométrable), et avec très peu de valeur ajoutée face à du vrai code. À moins qu'il y ait un vrai besoin de documenter ça alors que la technologie finale n'est pas encore bien établie (ou pour être parfaitement exact mais générique, comme pour publier, etc.), autant écrire directement le code, ou du moins écrire un prototype dans un langage de haut niveau à la place.
+	::choice true
+		::text
+			```python
+			def quicksort(array, start, end):
+				if end - start <= 1:
+					return
+				pivot = array[end-1]
+				pivotIndex = start - 1
+				for i in range(start, end-1):
+					if array[i] <= pivot:
+						pivotIndex += 1;
+						array[pivotIndex], array[i] = array[i], array[pivotIndex]
+				array[pivotIndex], array[end-1] = array[end-1], array[pivotIndex]
+				quicksort(array, start, pivotIndex);
+				quicksort(array, pivotIndex+1, end);```
+		::answer
+			C'est typiquement un prototype d'implémentation, ici en Python. Ce type de prototype dans un langage de haut niveau est le meilleur des deux mondes pendant la conception : contrairement à du pseudo-code, vous pouvez l'exécuter et donc le tester, et vous n'avez pas les lourdeurs de l'implémentation finale (langage plus lourd, contrat, documentation, tests unitaires, ...)
+	::choice true
+		::text
+			```c
+			void swap(int* ptr1, int* ptr2) {
+				int temp = *ptr1;
+				*ptr1 = *ptr2;
+				*ptr2 = temp;
+			}
+
+			void quicksort(int* array, int start, int end) {
+				assert(end >= start);
+				assert(start >= 0);
+				if (end - start <= 1)
+					return;
+				int pivot = array[end-1];
+				int pivotIndex = start - 1;
+				for (int i = start; i < end-1; i++) {
+					if (array[i] <= pivot) {
+						pivotIndex += 1;
+						swap(array+pivotIndex, array+i);
+				pivotIndex += 1
+				swap(array+pivotIndex, array+end-1);
+				quicksort(array, start, pivotIndex);
+				quicksort(array, pivotIndex+1, end);
+
+				for (int i = 0; i < end-1; i++)
+					assert(array[i] <= array[i+1]);
+			}
+			```
+		::answer
+			Et voici une implémentation finale, avec tous les éléments sous forme de code définitif.

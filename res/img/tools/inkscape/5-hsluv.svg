@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="96.407669mm"
+   height="23.802994mm"
+   viewBox="0 0 96.407669 23.802994"
+   version="1.1"
+   id="svg338289"
+   sodipodi:docname="5-hsluv.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview338291"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.1089995"
+     inkscape:cx="142.48462"
+     inkscape:cy="79.658623"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs338286">
+    <linearGradient
+       id="linearGradient405842"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#2b01ff;stop-opacity:1;"
+         offset="0"
+         id="stop405840" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient404765"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#f5e700;stop-opacity:1;"
+         offset="0"
+         id="stop404763" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient354231"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#ff0101;stop-opacity:1;"
+         offset="0"
+         id="stop354229" />
+    </linearGradient>
+    <color-profile
+       name="sRGB-IEC61966-2.1"
+       xlink:href="file:///C:/WINDOWS/system32/spool/drivers/color/sRGB%20Color%20Space%20Profile.icm"
+       id="color-profile423387" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient404765"
+       id="linearGradient405844"
+       x1="48.203835"
+       y1="17.852245"
+       x2="96.407669"
+       y2="17.852245"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#9fefff;fill-opacity:1;fill-rule:nonzero;stroke-width:0.313231"
+       id="rect339188-4-9-4"
+       width="48.203835"
+       height="11.901497"
+       x="-4.7683716e-07"
+       y="11.901497" />
+    <rect
+       style="fill:#2b01ff;fill-opacity:1;fill-rule:nonzero;stroke-width:0.313231"
+       id="rect339188"
+       width="48.203835"
+       height="11.901497"
+       x="0"
+       y="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:0.264583"
+       x="4.6850309"
+       y="7.2777982"
+       id="text355804"><tspan
+         sodipodi:role="line"
+         id="tspan355802"
+         x="4.6850309"
+         y="7.2777982"
+         style="stroke-width:0.264583">TSL (250, 100, 50)</tspan></text>
+    <rect
+       style="fill:#ffff01;fill-opacity:1;fill-rule:nonzero;stroke-width:0.313231"
+       id="rect339188-4"
+       width="48.203835"
+       height="11.901497"
+       x="48.203835"
+       y="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:0.264583"
+       x="52.888863"
+       y="7.2777982"
+       id="text355804-4"><tspan
+         sodipodi:role="line"
+         id="tspan355802-3"
+         x="52.888863"
+         y="7.2777982"
+         style="stroke-width:0.264583">TSL (60, 100, 50)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:0.264583"
+       x="1.6154518"
+       y="19.179295"
+       id="text355804-3"><tspan
+         sodipodi:role="line"
+         id="tspan355802-0"
+         x="1.6154518"
+         y="19.179295"
+         style="stroke-width:0.264583">HSLuv (210, 100, 90)</tspan></text>
+    <rect
+       style="fill:url(#linearGradient405844);fill-opacity:1.0;fill-rule:nonzero;stroke-width:0.313231"
+       id="rect339188-4-9"
+       width="48.203835"
+       height="11.901497"
+       x="48.203835"
+       y="11.901497" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:0.264583"
+       x="51.165974"
+       y="19.179295"
+       id="text355804-4-2"><tspan
+         sodipodi:role="line"
+         id="tspan355802-3-5"
+         x="51.165974"
+         y="19.179295"
+         style="stroke-width:0.264583">HSLuv (80, 100, 90)</tspan></text>
+  </g>
+</svg>

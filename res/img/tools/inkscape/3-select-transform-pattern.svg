@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="79.207367mm"
+   height="14.903221mm"
+   viewBox="0 0 79.207367 14.903221"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.9825758"
+     inkscape:cx="154.39675"
+     inkscape:cy="21.793244"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1"
+       id="pattern15902"
+       patternTransform="matrix(1.0460771,0.92160123,-8.4255969,9.5635998,0,0)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="1"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Strips1_1"
+       inkscape:stockid="Stripes 1:1"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect14871" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1-5"
+       id="pattern15902-8"
+       patternTransform="matrix(1.0460771,0.92160123,-8.4255969,9.5635998,31.126746,-4.2889784)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="1"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Strips1_1-5"
+       inkscape:stockid="Stripes 1:1"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect14871-2" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1-3"
+       id="pattern15902-4"
+       patternTransform="matrix(2.0921536,0.92160123,-16.851189,9.5635998,22.96546,3.162635)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="1"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Strips1_1-3"
+       inkscape:stockid="Stripes 1:1"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect14871-9" />
+    </pattern>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-8.1612902,-8.3387122)">
+    <rect
+       style="fill:url(#pattern15902);fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2917"
+       width="24.040318"
+       height="7.4516134"
+       x="8.1612902"
+       y="12.064516" />
+    <g
+       id="g16700"
+       transform="translate(0,0.56317472)">
+      <rect
+         style="fill:url(#pattern15902-8);fill-opacity:1;stroke:none;stroke-width:2.82843;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2917-6"
+         width="48.080627"
+         height="7.4516134"
+         x="39.288033"
+         y="7.7755375" />
+      <rect
+         style="fill:url(#pattern15902-4);fill-opacity:1;stroke:none;stroke-width:2.82843;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2917-7"
+         width="48.08062"
+         height="7.4516134"
+         x="39.288033"
+         y="15.227145" />
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:none;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.14;stroke-dasharray:none;stroke-opacity:1"
+         x="42.741318"
+         y="13.16429"
+         id="text16688"><tspan
+           sodipodi:role="line"
+           id="tspan16686"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.14;stroke-dasharray:none;stroke-opacity:1"
+           x="42.741318"
+           y="13.16429">Désactivé</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:none;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.14;stroke-dasharray:none;stroke-opacity:1"
+         x="43.123722"
+         y="20.615898"
+         id="text16692"><tspan
+           sodipodi:role="line"
+           id="tspan16690"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.14;stroke-dasharray:none;stroke-opacity:1"
+           x="43.123722"
+           y="20.615898">Activé</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,133 @@
+::exercise treemap-implementation
+::title Implémentation d'une table associative avec un arbre binaire de recherche
+::tags algorithme C arbre map
+::todo Test unitaire
+::courses LO21.arbres
+::source PL$tek
+::question difficulty=2
+	::text
+		On souhaite implémenter une table associative qui s'appuie sur un arbre binaire de recherche.
+		Ça pourra se faire dans le langage de votre choix, mais sans tricher par des constructions de haut niveau.
+		Le mieux serait le langage C.
+		Dans cet exercice, notez bien qu'il y a plusieurs approches possibles.
+
+		Écrivez la définition du ou des types (sans les fonctions associées) qui permettent de représenter un arbre binaire de recherche.
+
+		En principe, il vaut suffit du type d'un nœud, vu que c'est récursif.
+		Cela dit, pour faire les opérations sur place, c'est plus pratique de pouvoir représenter un arbre vide, notamment pour faciliter la suppression d'éléments.
+		En effet, juste donner un pointeur nul ne permet pas de modifier un arbre directement, donc ça fait des cas compliqués à traiter.
+		On ajoute donc généralement un *wrapper*, un type arbre qui contient le nœud racine et qu'on présentera à l'utilisateur, plutôt que de lui faire utiliser directement les nœuds.
+	::hint 0
+		On rappelle que pour une table associative, chaque nœud a une clé et une valeur associée
+	::answer
+		```c
+		// Binary Search Tree node
+		typedef struct _bst_node_s {
+			struct _bst_node_s* left;
+			struct _bst_node_s* right;
+			int key;
+			int value;
+		} _bst_node;
+
+		// Interface to the Binary Search Tree
+		typedef struct {
+			_bst_node* root;
+		} treemap_t;```
+::question difficulty=2
+	::text
+		Implémenter les fonctions de base pour utiliser vos arbres :
+
+		- Créer un nouvel arbre vide
+		- Une fonction interne pour créer un nouveau nœud
+		- Tester si un arbre est vide
+		- Détruire un nœud
+		- Détruire un arbre
+
+		Essayez de respecter les bonnes pratiques de votre langage (en particulier sur la propriété des ressources en C)
+	::answer
+		```c
+		/* Initialize a new tree
+		 * - treemap_t* tree : pointer to an unitialized treemap_t structure */
+		void treemap_init(treemap_t* map) {
+			tree->root = NULL;
+		}
+
+		/* Create and initialize a new BST node */
+		_bst_node* _create_treemap_node(int key, int value) {
+			_bst_node* node = malloc(sizeof(_bst_node));
+			node->key = key;
+			node->value = value;
+			node->left = node->right = NULL;
+			return node;
+		}
+
+		/* Check whether a BST is empty */
+		bool treemap_empty(treemap_t* map) {
+			return treemap->root == NULL;
+		}
+
+		/* Delete a BST node and all of its children */
+		static void _delete_treemap_node(_bst_node* node) {
+			if (node->left != NULL)
+				_delete_treemap_node(node->left);
+			if (node->right != NULL)
+				_delete_treemap_node(node->right);
+			free(node);
+		}
+
+		/* Clear the map. The map is emptied and all associated memory is released.
+		 * After a call to this function, the treemap_t structure is ready for free-ing */
+		void treemap_clear(treemap_t* map) {
+			if (map->root != NULL)
+				_delete_treemap_node(map->root);
+		}```
+::question difficulty=3
+	::text
+		Implémenter les opérations sur la table associative :
+
+		- Insertion d'un couple clé-valeur (ou modification de la valeur associée à la clé)
+		- Récupération de la valeur associée à une clé
+	::answer
+		```c
+		/* Backend function to insert or update a key-value couple */
+		void _treemap_insert_node(_bst_node* node, int key, int value) {
+			if (key == node->key) {  // The key is already in the map : update the value
+				node->value = value;
+			} else if (key < node->key) {
+				if (node->left == NULL)
+					node->left = _create_treemap_node(key, value);
+				else
+					_treemap_insert_node(node->left, key, value);
+			} else if (key > node->key) {
+				if (node->right == NULL)
+					node->right = _create_treemap_node(key, value);
+				else
+					_treemap_insert_node(node->right, key, value);
+			}
+		}
+
+		/* Insert or update a key-value couple */
+		void treemap_insert(treemap_t* map, int key, int value) {
+			if (map->root == NULL)
+				map->root = _create_treemap_node(key, value);
+			else
+				_treemap_insert_node(map->root, key, value);
+		}
+
+		/* Backend function to get a pointer to the value associated to the given key, or NULL if it doesn't exist */
+		int* _treemap_find_value(_bst_node* node, int key) {
+			if (node == NULL)
+				return NULL;
+			else if (key == node->key)
+				return node->value;
+			else if (key < node->key)
+				return _treemap_find_value(node->left);
+			else if (key > node->key)
+				return _treemap_find_value(node->right);
+		}
+
+		/* Return a pointer to the value associated to the given key
+		 * If the key does not exist in the map, return NULL */
+		int* treemap_get(treemap_t* map, int key) {
+			return _treemap_find_value(map->root, key);
+		}```

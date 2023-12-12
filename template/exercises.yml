@@ -1,0 +1,13 @@
+hintLevelDescription:
+    - Rappel ou conseil générique (pas d'information supplémentaire)
+    - Donne une piste
+    - Info qui aide à trouver la solution
+    - Élément de solution
+    - Donne la solution
+questionLevelDescription:
+    - NULL
+    - Facile
+    - Demande un peu de réflexion
+    - Moyen à difficile (niveau de question d'examen)
+    - Difficile (niveau d'une situation réelle indépendante)
+    - Très difficile (défi)

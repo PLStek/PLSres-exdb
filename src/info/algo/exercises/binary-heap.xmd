@@ -1,0 +1,273 @@
+::exercise binary-heap
+::title Implémentation d'un tas binaire
+::tags algorithme arbre
+::courses LO21.arbres
+::source PL$tek
+::question difficulty=3
+	::text
+		On cherche à implémenter un tas. Pour ne pas se perdre en fioritures, vous avez à votre disposition les fonctions suivantes :
+
+		- `échanger(nœud1, nœud2)` : intervertit deux nœuds dans l'arbre
+
+		{!svg: info/algo/exercises/binary-heap-swap.svg}
+
+		- `insérerEnDernier(tas, valeur) -> nœud` : insère un nœud à la « fin » de l'arbre, donc tout à droite du dernier niveau, ou à gauche d'un nouveau niveau si tous les niveaux existants sont pleins
+
+		{!svg: info/algo/exercises/binary-heap-insert-last.svg}
+
+		- `retirerDernier(tas) -> valeur` : retire le « dernier » nœud de l'arbre (le nœud tout à droite du niveau le plus profond) et retourne sa valeur
+
+		{!svg: info/algo/exercises/binary-heap-remove-last.svg}
+
+		- `père(nœud) -> nœud` : donne le nœud père du nœud donné (indéfini sur la racine)
+
+		Rappel des propriétés :
+
+		- L'arbre est complet (on remplit niveau par niveau, de gauche à droite)
+		- La priorité d'un nœud est toujours supérieure ou égale à la valeur de tous ses nœuds fils. Ici, on partira du principe que la valeur du nœud est sa priorité (plus elle est élevée, plus le nœud est prioritaire)
+
+		Écrire l'algorithme de la méthode `ajouter(tas, valeur)`, qui permet d'ajouter un nouvel élément au tas en respectant ces propriétés.
+	::hint 0
+		Le tas a les propriétés ci-dessus quand on vous le donne, et il doit toujours les avoir en partant
+	::hint 1
+		Pour respecter la complétude, le plus simple est de retirer ou ajouter des nœuds directement seulement à la « fin » de l'arbre
+	::hint 2
+		Ça utilise *typiquement* 3 des 4 fonctions définies ci-dessus
+	::hint 2
+		Pour ça, on commence par insérer la valeur arbitrairement (comprendre : à un endroit bien précis mais qui n'est pas sa position définitive), puis on corrige les propriétés
+	::hint 3
+		On commence par insérer la valeur en dernier, puis on corrige jusqu'à ce que les propriétés soient respectées
+	::hint 3
+		Il n'y a que la branche sur laquelle vous avez inséré le nouveau nœud qu'il faudra corriger
+	::hint 4
+		« Corriger » les propriétés revient à faire remonter la nouvelle valeur dans l'arbre jusqu'à ce qu'elle soit à la bonne place
+	::hint 4
+		Donc échanger avec son parent jusqu'à ce que son parent soit supérieur à la nouvelle valeur
+	::answer
+		```
+		ajouter(tas, valeur) :
+			nœudInséré <- insérerEnDernier(tas, valeur)
+			Tant que père(nœudInséré) est défini et que père(nœudInséré).valeur < nœudInséré.valeur:
+				échanger(nœudInséré, père(nœudInséré))
+		```
+
+		C'est conceptuellement bizarre mais concrètement très simple : on met en dernier, et on remonte jusqu'à ce que le père soit bien supérieur à la nouvelle valeur.
+		En remontant, les enfants seront forcément inférieurs : on a remonté parce que l'ancien père (qui est maintenant un nœud fils) est inférieur, et l'autre enfant est inférieur à l'ancien père.
+
+		{!svg: info/algo/exercises/binary-heap-insert.svg}
+::question difficulty=4
+	::text
+		On rappelle les fonctions pré-définies :
+
+		- `échanger(nœud1, nœud2)` : intervertit deux nœuds dans l'arbre
+		- `insérerEnDernier(tas, valeur) -> nœud` : insère un nœud à la « fin » de l'arbre, donc tout à droite du dernier niveau, ou à gauche d'un nouveau niveau si tous les niveaux existants sont pleins
+		- `retirerDernier(tas) -> valeur` : retire le « dernier » nœud de l'arbre (le nœud tout à droite du niveau le plus profond) et renvoie sa valeur
+		- `père(nœud) -> nœud` : donne le nœud père du nœud donné (indéfini sur la racine)
+
+		Écrire l'algorithme de la méthode `défiler(tas)` qui retire le nœud le plus prioritaire (donc celui avec la valeur la plus élevée), et renvoie sa valeur
+	::hint 1
+		Du fait des propriétés du tas, la racine est toujours le nœud le plus prioritaire. Le problème n'est pas de le trouver, c'est de remettre les bonnes propriétés après l'avoir retirée
+	::hint 1
+		Ça utilise *typiquement* 3 des 4 fonctions définies ci-dessus
+	::hint 1
+		Comme pour l'ajout, le seul endroit où on peut ajouter ou retirer directement des éléments sans casser la complétude c'est le dernier nœud de l'arbre
+	::hint 2
+		C'est un principe assez similaire à l'ajout (comprendre, mettre un nœud quelque part puis le déplacer dans l'arbre jusqu'à ce qu'il soit au bon endroit), sauf qu'ici on doit retirer un nœud
+	::hint 4
+		Il faut prendre le dernier nœud de l'arbre, le mettre à la place vacante puis le faire descendre
+	::hint 2
+		Attention : il faut bien s'assurer que tout soit bien dans le bon ordre : il ne faut pas qu'en descendant le nœud, un autre se retrouve au mauvais endroit
+	::answer
+		```
+		retirer(tas) -> valeur
+			# On stocke la valeur la plus prioritaire
+			valeurRetirée <- racine(tas).valeur
+			# On prend le dernier nœud du tas et on le met à la racine (ici pour simplifier on remplace la valeur)
+			nœudÀCorriger <- racine(tas)
+			nœudÀCorriger.valeur = retirerDernier(tas)
+			# On le descend dans l'arbre, en l'échangeant à chaque fois avec son fils maximum s'il est plus prioritaire que lui
+			# Beaucoup de logique ici, mais c'est surtout pour traiter les nœuds indéfinis, à part ça c'est juste échanger avec le fils maximum tant que c'est pertinent
+			# D'ailleurs, le fait que c'est un arbre complet permet d'économiser un peu de logique (pas de cas où le fils droit est défini mais pas le fils gauche)
+			Tant que (nœudÀCorriger.gauche est défini et nœudÀCorriger.gauche.valeur > nœudÀCorriger.valeur) OU
+						(nœudÀCorriger.droite est défini et nœudÀCorriger.droite.valeur > nœudÀCorriger.valeur):
+				Si nœudÀCorriger.gauche est défini:
+					Si nœudÀCorriger.droite est défini:
+						Si nœudÀCorriger.droite.valeur > nœudÀCorriger.valeur et nœudÀCorriger.droite.valeur > nœudÀCorriger.gauche.valeur:
+							échanger(nœudÀCorriger, nœudÀCorriger.droite)
+						Sinon, si nœudÀCorriger.gauche.valeur > nœudÀCorriger.valeur et nœudÀCorriger.gauche.valeur > nœudÀCorriger.droite.valeur:
+							échanger(nœudÀCorriger, nœudÀCorriger.gauche)
+					Sinon, si nœudÀCorriger.gauche.valeur > nœudÀCorriger.valeur:
+						échanger(nœudÀCorriger, nœudÀCorriger.gauche)
+			Renvoyer valeurRetirée```
+
+		On prend le dernier nœud, on le met à la place de la racine, et on le descend dans l'arbre jusqu'à ce qu'il soit à sa place.
+
+		{!svg: info/algo/exercises/binary-heap-pop.svg}
+::question difficulty=3
+	::text
+		Concrètement, les fonctions de base sur lesquelles on s'est appuyés sont particulièrement pénibles à implémenter sur un vrai arbre.
+		Heureusement, comme on a un arbre binaire (complet de surcroît), il existe une autre représentation plus efficace.
+		Trouver cette représentation et comment on l'utilise.
+
+		**Cette question est nécessaire aux suivantes — si vous ne trouvez pas regardez la réponse avant de passer à la suite**
+	::hint 1
+		Un arbre binaire a un nombre bien défini d'éléments sur chaque niveau de profondeur : 1 au niveau racine, 2 au niveau suivant, 4 au suivant, et ainsi de suite
+	::hint 1
+		Ça permet de représenter l'arbre binaire sous forme d'un tableau, avec des relations simples qui permettent de passer d'un nœud à son père ou à ses fils
+	::hint 3
+		Imaginez juste aplatir l'arbre dans un tableau, niveau par niveau. Un schéma peut beaucoup aider.
+	::hint 4
+		Il suffit de mettre les éléments niveau par niveau (la racine, puis tous les éléments du niveau de gauche à droite, puis le niveau suivant, et ainsi de suite).
+		De là, il ne reste plus qu'à trouver comment passer du fils au père et du père aux fils
+	::answer
+		Globalement, on « déroule » l'arbre niveau par niveau : on met la racine, puis les éléments du niveau suivant de gauche à droite, puis le niveau suivant, et ainsi de suite
+
+		{!svg: info/algo/exercises/heap-array.svg}
+
+		De là, il suffit de retrouver la relation entre père et fils. Si on appelle `n` l'index d'un nœud :
+
+		- Les fils gauche et droit du nœud sont respectivement aux index `2n + 1` et `2n + 2`
+		- Réciproquement, le père du nœud est à l'index `floor((n-1) / 2)`.
+::question difficulty=2
+	::text
+		On souhaite désormais implémenter cette structure en C, à l'aide d'un tableau, comme déterminé à la question précédente.
+		Il faudra donc implémenter chacune des fonctions que nous avons utilisé précédemment (`échanger`, `insérerEnDernier`, …).
+		Mais avant ça, déterminez toutes les informations nécessaires à la maintenance de notre structure, et écrivez la structure en C correspondante.
+		Vous pouvez aussi implémenter les fonctions pour créer et détruire la structure.
+	::hint 1
+		Gardez en tête les opérations `insérerEnDernier` et `retirerDernier`. Comment celles-ci peuvent être implémentées facilement dans un tableau, et donc de quelle information a-t'on besoin ?
+	::hint 3
+		Autrement dit, on a un tableau qui a une certaine capacité, et un nombre réel d'éléments variable, qu'il faut retenir tous les deux.
+	::answer
+		```c
+		typedef struct {
+			int* valeurs;        // Tableau contenant les éléments
+			int tailleTotale;    // Capacité du tableau
+			int tailleUtilisee;  // Nombre d'éléments dans le tableau pour le moment
+		} tas_t;
+
+		void initialiserTas(tas_t* tas, int capaciteInitiale) {
+			tas->tailleTotale = capaciteInitiale;
+			tas->tailleUtilisee = 0;
+			tas->valeurs = calloc(sizeof(int), capaciteInitiale);
+		}
+
+		void détruireTas(tas_t* tas) {
+			free(tas->valeurs);
+			// Bonne pratique : mettre des valeurs qui sont sûres de causer un crash si on essaie d'utiliser la structure après
+			// (pointeur et capacité nuls), et qui se reconnaissent facilement dans un débugger
+			tas->valeurs = NULL;
+			tas->tailleUtilisee = tas->tailleTotale = 0;
+		}
+		```
+::question difficulty=3
+	::text
+		À partir de cette structure, implémentez en C les fonctions de base définies plus haut :
+
+		- `échanger(nœud1, nœud2)` : intervertit deux nœuds dans l'arbre
+		- `insérerEnDernier(tas, valeur) -> nœud` : insère un nœud à la « fin » de l'arbre, donc tout à droite du dernier niveau, ou à gauche d'un nouveau niveau si tous les niveaux existants sont pleins
+		- `retirerDernier(tas) -> valeur` : retire le « dernier » nœud de l'arbre (le nœud tout à droite du niveau le plus profond) et renvoie sa valeur
+		- `père(nœud) -> nœud` : donne le nœud père du nœud donné (indéfini sur la racine)
+		- `filsGauche(nœud) -> nœud` et `filsDroit(nœud) -> nœud` : donne les fils respectifs du nœud donné
+
+		Il peut y avoir besoin d'arguments supplémentaires.
+
+		Dans `insérerEnDernier`, pensez bien à traiter le cas où le tableau est rempli : soit agrandir le tableau pour l'exercice, soit une erreur si vous êtes pressé mais il faut que ce soit traité
+	::hint 1
+		Avant tout, il faut réfléchir un peu à comment on représente un *nœud* ici (autrement dit, l'information qui permet de repérer à la fois une valeur dans le tableau, son père et ses fils).
+	::hint 2
+		Autrement dit, la position d'une valeur dans l'arbre
+	::answer
+		On travaille avec les index dans le tableau quand il faut retourner un nœud, ça donne toute l'information nécessaire et c'est efficace.
+
+		```c
+		#define FILS_GAUCHE(index) (2*(index) + 1)
+		#define FILS_DROIT(index) (2*(index) + 2)
+		// Division entière
+		#define PERE(index) (((index)-1) / 2)
+
+		void echanger(tas_t* tas, int index1, int index2) {
+			assert(index1 < tas->tailleUtilisee && index2 < tas->tailleUtilisee);
+
+			int temp = tas->valeurs[index1];
+			tas->valeurs[index1] = tas->valeurs[index2];
+			tas->valeurs[index2] = temp;
+		}
+
+		void augmenterCapacite(tas_t* tas) {
+			// C'est parfaitement arbitraire, mais dans cette situation c'est pas déconnant de doubler la taille
+			int nouvelleTaille = tas->tailleTotale * 2;
+			tas->valeurs = realloc(tas-valeurs, nouvelleTaille);
+			tas->tailleTotale = nouvelleTaille;
+		}
+
+		int insererEnDernier(tas_t* tas, int valeur) {
+			// Le tableau est déjà plein -> on l'agrandit
+			if (tas->tailleUtilisee >= tas->tailleTotale)
+				augmenterCapacite(tas);
+
+			// On a la facilité d'être dans un tableau et de savoir où est ce fameux « dernier élément » facilement
+			// On incrémente bien la taille utilisée après avoir récupéré l'index où on insère
+			int index = tas->tailleUtilisee++;
+			tas->valeurs[index] = valeur;
+			return index;
+		}
+
+		int retirerDernier(tas_t* tas) {
+			// Pareil : on sait où trouver le dernier
+			int valeur = tas->valeurs[--tas->tailleUtilisee];
+			// On a décrémenté la taille occupée donc notre valeur est comme supprimée
+			return valeur;
+		}```
+::question difficulty=2
+	::text
+		Maintenant qu'on a nos fonctions de base, il ne reste plus qu'à implémenter `ajouter(tas, valeur)` et `défiler(tas)`
+	::hint 0
+		Attention au traitement des cas limite (un nœud fils n'existe pas, on remonte au-delà de la racine, …)
+	::answer
+		void ajouter(tas_t* tas, int valeur) {
+			int indexPere, indexNouveau = insererEnDernier(tas, valeur);
+			// indexNouveau = 0 -> on a déjà atteint la racine
+			while (indexNouveau > 0 && tas->valeurs[indexPere = PERE(indexNouveau)] < tas->valeurs[indexNouveau]) {
+				// On remonte le nouvel élément
+				echanger(tas, indexNouveau, indexPere);
+				indexNouveau = indexPere;
+			}
+		}
+
+		int defiler(tas_t* tas) {
+			// La valeur la plus prioritaire est à la racine, qui est à l'index 0
+			int valeurRetiree = tas->valeurs[0];
+			tas->valeurs[0] = retirerDernier(tas);
+			int indexCorrection = 0;
+			while (1) {
+				int indexGauche = FILS_GAUCHE(indexCorrection);
+				int indexDroite = FILS_DROIT(indexCorrection);
+
+				// Si l'index est en dehors de la zone occupée du tableau, c'est que le fils n'existe pas
+				// Pas de fils gauche -> pas de fils droit (arbre complet) -> pas de fils du tout -> fini
+				if (indexGauche >= tas->tailleUtilisee)
+					break;
+				// Fils gauche existant mais pas de fils droit
+				else if (indexDroit >= tas->tailleUtilisee) {
+					// Fils gauche supérieur -> on descend à gauche, sinon on quitte
+					if (tas->valeurs[indexGauche] > tas->valeurs[indexCorrection]) {
+						echanger(tas, indexCorrection, indexGauche);
+						indexCorrection = indexGauche;
+					} else break;
+				}
+				// Deux fils, le gauche est supérieur au droit et au nœud à descendre -> on descend à gauche
+				else if (tas->valeurs[indexGauche] > tas->valeurs[indexCorrection] && tas->valeurs[indexGauche] > tas->valeurs[indexDroite]) {
+					echanger(tas, indexCorrection, indexGauche);
+					indexCorrection = indexGauche;
+				}
+				// Deux fils, le droit est supérieur au gauche et au nœud à descendre -> on descend à droite
+				else if (tas->valeurs[indexDroite] > tas->valeurs[indexCorrection] && tas->valeurs[indexDroite] > tas->valeurs[indexGauche]) {
+					echanger(tas, indexCorrection, indexDroite);
+					indexCorrection = indexDroite;
+				}
+				// Deux fils, aucun des deux supérieur au nœud à descendre -> fini
+				else break;
+			}
+			return valeurRetiree;
+		}```

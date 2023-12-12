@@ -1,0 +1,41 @@
+::exercise iterative-to-recursive
+::title Conversion itératif -> récursif
+::tags algorithme boucle récursivité
+::courses LO21.récursivité
+::source PL$tek
+::question difficulty=2
+	::text
+		Convertissez l'algorithme suivant en fonction récursive.
+		Cet algorithme calcule la racine carrée par la convergences des suites adjacentes de la moyenne arithmétique et de la moyenne harmonique.
+		Par exemple, racineCarrée(2, 0.0001) donne la racine carrée de 2 à 0.0001 près
+
+		```python/result
+		def racineCarrée(x, précision):
+			arithmétique = 1
+			harmonique = x
+			while abs(harmonique - arithmétique) >= précision:
+				arithmétique_suivant = (arithmétique + harmonique) / 2
+				harmonique = 2 / (1/arithmétique + 1/harmonique)
+				arithmétique = arithmétique_suivant  # Petite bidouille sans quoi le calcul prend la moyenne arithmétique de cette étape au lieu de l'étape précédente
+			return harmonique
+
+		print(f"{racineCarrée(2, 0.0001)=}")
+		print(f"{racineCarrée(16, 0.0001)=}")
+		print(f"{racineCarrée(1000, 0.0000001)=}")```
+	::hint 2
+		Vous aurez besoin d'un *wrapper*, une fonction d'entrée qui prendra les paramètres de l'appelant et qui donnera les bons paramètres à la fonction récursive
+	::answer
+		```python/result
+		def moyenneGéométrique(x, y, précision):
+			if abs(x-y) < précision:
+				return y
+			arithmétique = (x + y) / 2
+			harmonique = 2 / (1/x + 1/y)
+			return moyenneGéométrique(arithmétique, harmonique, précision)
+
+		def racineCarrée(x, précision):
+			return moyenneGéométrique(1, x, précision)
+
+		print(f"{racineCarrée(2, 0.0001)=}")
+		print(f"{racineCarrée(16, 0.0001)=}")
+		print(f"{racineCarrée(1000, 0.0000001)=}")```

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="104.84973mm"
+   height="22.048246mm"
+   viewBox="0 0 104.84973 22.048246"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.1089995"
+     inkscape:cx="252.48939"
+     inkscape:cy="82.503574"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.1612902,-4.7662001)">
+    <rect
+       style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2917"
+       width="24.040318"
+       height="7.4516134"
+       x="8.1612902"
+       y="12.064516" />
+    <rect
+       style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2917-6"
+       width="70.258057"
+       height="7.4516134"
+       x="40.04343"
+       y="5.7662001" />
+    <rect
+       style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:3.41907;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2917-3"
+       width="70.258057"
+       height="7.4516134"
+       x="40.04343"
+       y="17.653297" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
+       x="43.379032"
+       y="11.154953"
+       id="text4737"><tspan
+         sodipodi:role="line"
+         id="tspan4735"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="43.379032"
+         y="11.154953">Désactivé</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
+       x="43.761436"
+       y="23.042049"
+       id="text4793"><tspan
+         sodipodi:role="line"
+         id="tspan4791"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="43.761436"
+         y="23.042049">Activé</tspan></text>
+  </g>
+</svg>

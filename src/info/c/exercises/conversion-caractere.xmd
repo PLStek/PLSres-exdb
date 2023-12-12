@@ -1,0 +1,66 @@
+::exercise conversion-caractere
+::title Conversion de caractères
+::tags code C
+::courses IF2 LO21
+::source PL$tek
+::question difficulty=2
+	::text
+		Écrire un programme en C qui demande un caractère ASCII, le convertit en majuscule si c'est une lettre minuscule, et affiche le résultat
+	::hint 1
+		Exploitez les valeurs ASCII
+	::hint 3
+		Les minuscules sont entre `'a'` et `'z'`, les majuscules sont entre `'A'` et `'Z'`
+	::answer
+		```c/result/includes=["stdio.h"]; stdin="t\n"
+		int main() {
+			char caractere;
+			scanf("%c", &caractere);
+			// Les minuscules ont leur valeur ASCII entre 'a' et 'z'
+			if (caractere >= 'a' && caractere <= 'z')
+				caractere += 'A' - 'a';  // On décale vers l'intervalle des majuscules ('A' - 'a' = 65 - 97 = -32 -> minuscule - 32 = majuscule)
+			printf("%c\n", caractere);
+			return 0;
+		}```
+::question difficulty=1
+	::text
+		Écrire un programme permettant d'entrer une chaîne de caractères et de convertir la chaîne de caractères complète.
+	::hint 1
+		Pensez bien que la chaîne de caractères se termine au caractère nul
+	::answer
+		```c/result/includes=["stdio.h"]; stdin="TeSt dE CHaInE de carACtErES\n"
+		int main() {
+			char chaine[100];
+			fgets(chaine, 100, stdin);
+
+			// On arrête quand on atteint le caractère nul, en exploitant bien la condition de la boucle `for`
+			// Ça se fait aussi bien par une boucle `while` ou un `for` où on teste dans le corps de boucle
+			for (int i = 0; chaine[i] != '\0'; i++) {
+				if (chaine[i] >= 'a' && chaine[i] <= 'z')
+					chaine[i] += 'A' - 'a';
+			}
+
+			puts(chaine);
+			return 0;
+		}
+		```
+::question difficulty=1
+	::text
+		Faites la conversion de la chaîne de caractères dans une fonction séparée
+	::hint 3
+		La chaîne de caractères est passée par référence, on peut faire la modif sur place
+	::answer
+		```c/result/includes=["stdio.h"]; stdin="TeSt dE CHaInE de carACtErES\n"
+		void conversion_majuscules(char* chaine) {
+			for (int i = 0; chaine[i] != '\0'; i++) {
+				if (chaine[i] >= 'a' && chaine[i] <= 'z')
+					chaine[i] += 'A' - 'a';
+			}
+		}
+		int main() {
+			char chaine[100];
+			fgets(chaine, 100, stdin);
+			conversion_majuscules(chaine);
+			puts(chaine);
+			return 0;
+		}
+		```

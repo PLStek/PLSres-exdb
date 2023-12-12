@@ -1,0 +1,48 @@
+::exercise binary-search-tree
+::title Opérations sur un arbre binaire de recherche
+::tags algorithme arbre récursivité recherche
+::courses LO21.arbres
+::source PL$tek
+::question difficulty=3
+	::text
+		Implémenter l'opération de recherche dans un arbre binaire de recherche. Typiquement, on cherche à savoir si une valeur est dans l'arbre ou pas.
+	::hint 0
+		On rappelle, à gauche c'est inférieur, à droite c'est supérieur
+	::hint 2
+		Il suffit donc de vérifier ça récursivement
+	::answer
+		```
+		recherche_bst(nœud : nœud d'arbre binaire de recherche, valeur_recherchée)
+			nœud est indéfini                -> Faux
+			valeur_recherchée == nœud.valeur -> Vrai
+			valeur_recherchée < nœud.valeur  -> recherche_bst(nœud.gauche, valeur_recherchée)
+			valeur_recherchée > nœud.valeur  -> recherche_bst(nœud.droite, valeur_recherchée)
+		```
+::question difficulty=3
+	::text
+		Implémenter l'insertion dans un arbre binaire de recherche. Pour le moment, on ne se préoccupe pas de garder l'arbre équilibré.
+	::hint 0
+		Il n'y a pas à se casser la tête, trouvez juste le moyen logique de rajouter une valeur quelque part dans l'arbre où elle respecte les propriétés.
+	::hint 1
+		Comme toujours, on a des propriétés récursives donc une approche récursive
+	::hint 3
+		En gros, on descend dans l'arbre comme pour la recherche et on insère le nœud dès qu'on arrive à un endroit où on peut l'insérer
+	::answer
+		```
+		insertion_bst(nœud : nœud d'arbre binaire de recherche, valeur_insérée)
+			Précondition: nœud est défini  # On ne descend pas sur un nœud indéfini dans cet algo
+			Si nœud.valeur == valeur_insérée:
+				# Si la valeur est déjà dans l'arbre, le comportement à adopter dépend de votre cas d'utilisation
+				# En général (par exemple dans le cas d'un ensemble), on ne doit pas garder de doublons, ou ça n'a pas de sens, donc dans ces cas on ne fera rien
+				# Dans le cas d'une table associative, on va généralement modifier la valeur associée à la clé
+				# Dans les très rares situations où vous devez garder des doublons, vous pouvez le mettre indifféremment à gauche ou à droite
+			Sinon, si valeur_insérée < nœud.valeur:
+				Si nœud.gauche est indéfini:  # On doit le mettre à gauche et il n'y a pas encore de fils gauche : on peut l'insérer ici
+					nœud.gauche = nouveau_nœud(valeur_insérée)
+				Sinon:  # S'il y a un fils à gauche, on continue récursivement
+					insertion_bst(nœud.gauche, valeur_insérée)
+			Sinon, si valeur_insérée > nœud.valeur:  # Même principe à droite
+				Si nœud.droite est indéfini:
+					nœud.droite = nouveau_nœud(valeur_insérée)
+				Sinon:
+					insertion_bst(nœud.droite, valeur_insérée)```

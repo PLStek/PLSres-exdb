@@ -1,0 +1,17 @@
+source: src/
+resources: res/
+exercises: exercises/
+collections: collections/
+css: css/
+font: font/
+img: img/
+template: template/
+output: out/ 
+exdboutput: out/exdb.json
+exdbrender: out/exdb-render.json
+temporary: temp/
+cache: cache.json
+linkprefix: /plsres/
+pagesuffix: ""
+staticprefix: /static/plsres/
+outformat: json

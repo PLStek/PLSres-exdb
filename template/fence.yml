@@ -1,0 +1,51 @@
+base:
+    color: [138, 184, 51]
+    rawlines: true
+code:
+    color: [138, 184, 51]
+    rawlines: false
+shell:
+    color: [64, 64, 64]
+    rawlines: false
+doc:
+    color: [9, 137, 197]
+    rawlines: true
+doctext:
+    color: [9, 137, 197]
+    rawlines: false
+example:
+    color: [0, 60, 120]
+    rawlines: false
+note:
+    color: [51, 170, 85]
+    rawlines: true
+warning:
+    color: [255, 175, 68]
+    rawlines: true
+alert:
+    color: [255, 58, 19]
+    rawlines: true
+counterexample:
+    color: [170, 27, 10]
+    rawlines: false
+exercise:
+    color: [0, 0, 0]
+    rawlines: false
+hint-reminder:
+    color: [0, 255, 0]
+    rawlines: false
+hint-info:
+    color: [255, 255, 0]
+    rawlines: false
+hint-method:
+    color: [255, 128, 0]
+    rawlines: false
+hint-answer:
+    color: [255, 0, 0]
+    rawlines: false
+answer:
+    color: [0, 0, 0]
+    rawlines: false
+bonus-exercise:
+    color: [0, 0, 255]
+    rawlines: false

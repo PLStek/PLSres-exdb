@@ -1,0 +1,11 @@
+title: INFO$tek
+subtitle: Tout ce qu’il faut pour l’info
+themeColor: [84, 158, 57]
+documentType: book
+sections:
+    - how-to-read
+    - algo
+    - c
+    - python
+    - debug
+    - good-practice

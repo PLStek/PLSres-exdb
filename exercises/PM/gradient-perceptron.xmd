@@ -1,0 +1,154 @@
+::exercise gradient-perceptron
+::title Apprentissage d’un réseau de neurones
+::courses PM1.dérivées
+::tags dérivée dérivée-partielle gradient
+::source PL$tek
+::question difficulty=3
+	::text
+		On souhaite dériver les règles d’apprentissage d’un réseau de neurones. Celles-ci se basent sur une [descente de gradient](https://fr.wikipedia.org/wiki/Algorithme_du_gradient).
+
+		On commence par réaliser l’apprentissage d’un seul neurone, ici un perceptron mono-couche. Un tel neurone est modélisé par un vecteur de *poids synaptiques* qui multiplient
+		ses entrées, et par une *fonction d’activation*, appliquée au résultat de cette opération, qui permet d’introduire de la non-linéarité dans le processus.
+
+		Pour l’apprentissage, on dispose d’un jeu de données d’entraînement constitué de correspondances entre des valeurs d’entrée et la valeur attendue en sortie du réseau de neurones.
+		On regarde alors la différence entre la sortie attendue et la sortie réelle pour déterminer les changements à apporter aux poids.
+
+		{!svg: exercises/PM/perceptron.svg}
+
+		Mathématiquement, on note :
+		
+		- $$\boldsymbol{W}$$ le vecteur des poids synaptiques, et $$W_k$$ les poids individuels
+		- $$\boldsymbol{X}$$ le vecteur des valeurs d’entrée venant du jeu d’entraînement, et $$X_k$$ les valeurs individuelles pour chaque entrée
+		- $$D$$ la sortie attendue correspondant à $$\boldsymbol{X}$$ dans le jeu d’entraînement
+
+		Le neurone réalise les opérations suivantes :
+
+		- Combinaison du vecteur d’entrée avec les poids synaptiques, $$v = \boldsymbol{W} \cdot \boldsymbol{X}$$. Autrement dit, $$v = \sum^n_{k=0} W_kX_k$$
+		- Application de la fonction d’activation, $$y = f(v)$$
+
+		Ici, on considèrera une fonction d’activation sigmoïde, $$f(v) = \frac{1}{1 + e^{-v}}$$
+
+		Comme première étape, calculez la dérivée de la fonction d’activation, $$\frac{\partial f(v)}{\partial v}$$, et exprimez-la en fonction de $$f(v)$$
+	::hint 2
+		La dérivée est simple, le problème est de retrouver f(v) dans son expression. Essayez de séparer le résultat pour retrouver les éléments de l’expression de f(v)
+	::hint 3
+		À un endroit, remarquer que $$u = 1 + u - 1$$ peut vous faire retrouver l’expression de f(v)
+	::hint 4
+		Au final, $$\frac{\partial f(v)}{\partial v} = f(v) (1 - f(v))$$
+	::answer
+		$$\frac{\partial f(v)}{\partial v} = f(v) (1 - f(v))$$. Si $$y = f(v)$$, $$\frac{\partial y}{\partial v} = y(1-y)$$.
+
+		Démonstration : on utilise la règle habituelle $$\frac{d}{dt}\frac{1}{u} = \frac{-u’}{u^2}$$
+
+		$$\begin{aligned}
+		\frac{\partial f(v)}{\partial v} & = \frac{-(-e^{-x})}{(1 + e^{-x})^2}                                               \\
+		                                 & = \frac{e^{-x}}{(1 + e^{-x})^2}                                                   \\
+										 & = \frac{1}{1 + e^{-x}} \cdot \frac{e^{-x}}{1 + e^{-x}}                            \\
+										 & = f(v) \cdot \frac{1 + e^{-x} - 1}{1 + e^{-x}}                                    \\
+										 & = f(v) \cdot \left( \frac{1 + e^{-x}}{1 + e^{-x}} - \frac{1}{1 + e^{-x}} \right)  \\
+										 & = f(v) \cdot (1 - f(v))                                                           \\
+		\end{aligned}$$
+
+::question difficulty=4
+	::text
+		On établit ensuite la règle d’apprentissage complète. On réalise ainsi une descente de gradient pour minimiser l’erreur quadratique entre la sortie attendue et la sortie réelle du neurone, exprimée par :
+
+		$$E = \frac{1}{2}(y - D)^2$$
+
+		À l’étape d’apprentissage $$t$$, à l’aide d’une entrée d’entraînement $$\boldsymbol{X}$$ et d’une valeur de sortie attendue $$D$$,
+		on fait passer $$\boldsymbol{X}$$ par le neurone pour obtenir la sortie $$y$$, puis on met à jour chaque chaque poids synaptique par la formule suivante :
+
+		$$W_{k_màj} = W_k - \alpha \frac{\partial E}{\partial W_k}$$
+
+		Calculez la dérivée de l’erreur par rapport au poids $$W_k$$, afin de compléter la formule ci-dessus. La formule de la sortie réelle $$y$$ du neurone est dans l’énoncé de la question précédente.
+		On rappelle qu’on a fait passer $$\boldsymbol{X}$$ par le neurone, donc on a la valeur de tous les calculs intermédiaires — votre résultat final peut inclure $$y$$ par exemple
+	::hint 0
+		Ça ne sert à rien d’essayer de remplacer $$y$$ dans l’expression de E et de tout développer, ça va complètement exploser. Rappelez-vous que vous avez déjà calculé la dérivée d’un élément de la chaîne.
+	::hint 3
+		Ce problème est considérablement simplifié par la méthode de la chaîne de dérivation ($$\frac{\partial P}{\partial R} = \frac{\partial P}{\partial Q} \frac{\partial Q}{\partial R}$$)
+	::hint 1
+		De là, il reste seulement à décomposer notre dérivée en des éléments aussi simples que possibles
+	::hint 4
+		On peut décomposer ça en :
+		
+		- E est fonction de y
+		- y est fonction de v
+		- v est fonction de $$W_k$$
+	::answer
+		La solution se trouve facilement par une chaîne de dérivation $$\frac{\partial P}{\partial R} = \frac{\partial P}{\partial Q} \frac{\partial Q}{\partial R}$$.
+		On peut ainsi décomposer $$\frac{\partial E}{\partial W_k} = \frac{\partial E}{\partial y} \frac{\partial y}{\partial v} \frac{\partial v}{\partial W_k}$$
+
+		Premier segment, par la règle $$\frac{d}{dt} u^2 = 2u’u$$
+
+		$$\begin{aligned}
+		\frac{\partial E}{\partial y} & = \frac{\partial}{\partial y} \frac{1}{2}(y - D)^2 \\
+		                              & = \frac{1}{2} \cdot 2 \cdot 1 \cdot (y - D)        \\
+									  & = y - D                                            \\
+		\end{aligned}$$
+
+		Le deuxième segment est résolu par la question précédente, $$y = f(v)$$, donc $$\frac{\partial y}{\partial v} = f(v) (1 - f(v)) = y(1-y)$$
+
+		Pour le troisième segment, $$v$$ est une simple combinaison linéaire :
+		
+		$$v = \sum^n_{i=0} W_iX_i$$
+
+		Dans cette somme, seul le terme où $$i = k$$ dépend de $$W_k$$, tous les autres peuvent être considérés comme des constantes additives et disparaissent à la dérivation. D’où :
+
+		$$\frac{\partial v}{\partial W_k} = \frac{\partial}{\partial W_k} W_kX_k = X_k$$
+
+		Le résultat général est donc le produit de ces trois éléments :
+
+		$$\frac{\partial E}{\partial W_k} = (y - D) y(1 - y) X_k$$
+::question difficulty=5
+	::text
+		De tels neurones peuvent être combinés pour construire un *réseau* de neurones, par exemple un [perceptron multi-couches](https://fr.wikipedia.org/wiki/Perceptron_multicouche).
+		On peut prendre un exemple simple comme celui-ci, avec une couche cachée et un seul neurone de sortie ($$y$$ et $$D$$ restent des valeurs simples et non des vecteurs).
+
+		{!svg: exercises/PM/multilayer-perceptron.svg}
+
+		Dans un tel réseau, la sortie des neurones de la couche cachée devient l’entrée du neurone de sortie.
+		Cela fait que l’apprentissage des neurones de sortie reste identique à la question précédente, en remplaçant juste $$X_k$$ par la sortie des neurones cachés.
+		L’apprentissage des neurones de la couche cachée est légèrement plus complexe.
+
+		On note :
+
+		- $$X_i$$ la i-ième entrée du réseau, donnée en entrée au neurones cachés
+		- $$W_{ij}$$ le poids synaptique qui relie l’entrée $$X_i$$ au neurone caché $$j$$
+		- $$v_j$$ le résultat intermédiaire du neurone caché $$j$$, soit $$v_j = \sum_{i=0}^n W_{ij}X_i$$
+		- $$y_j$$ la sortie du j-ième neurone caché, donc également la j-ième entrée du neurone de sortie, soit $$y_j = f(v_j)$$
+		- $$W_{js}$$ le poids synaptique qui relie la sortie du neurone caché $$j$$ au neurone de sortie
+		- $$v_s$$ le résultat intermédiaire du neurone de sortie, soit $$v_s = \sum_{j=0}^n W_{js}y_j$$
+		- $$y_s$$ la sortie du neurone de sortie, soit $$y_s = f(v_s)$$, qui sera comparée à la sortie attendue $$D$$
+
+		Calculer le gradient de l’erreur $$\frac{\partial E}{\partial W_{ij}}$$ pour un quelconque poids $$W_{ij}$$ de la couche cachée.
+		Rappelez-vous que cette rétropropagation de l’erreur se fait après avoir fait passer $$\boldsymbol{X}$$ par le réseau de neurones, donc on a pu garder la valeur
+		de tous les résultats intermédiaires : votre résultat final peut donc inclure du $$y_s$$ et $$y_j$$, par exemple.
+	::hint 1
+		Ça fait beaucoup d’infos et de symboles mais ce n’est pas plus compliqué, il suffit de reconnaître la chaîne d’opérations et de construire la chaîne de dérivation correspondante.
+		Tant que tout est bien décomposé en remontant de E jusqu’à l’élément qui contient du $$W_{ij}$$, il n’y a rien de très complexe.
+	::hint 3
+		La chaîne est déjà entièrement détaillée dans la liste décrite dans l’énoncé — chaque élément dépend du suivant, vous n’avez qu’à exprimer ça comme une chaîne de dérivation et calculer chaque élément, c’est très similaire à la question précédente.
+	::answer
+		On applique la même méthode de la chaîne de dérivation, la chaîne est juste plus longue cette fois. Récapitulons, on a :
+
+		- $$E = \frac{1}{2}(y_s - D)^2$$
+		- $$y_s = f(v_s)$$
+		- $$v_s = \sum_{j=0}^n W_{js}y_j$$
+		- $$y_j = f(v_j)$$
+		- $$v_j = \sum_{i=0}^n W_{ij}X_i$$
+
+		On a donc une chaîne de dérivation :
+		
+		$$\frac{\partial E}{\partial W_{ij}} = \frac{\partial E}{\partial y_s} \frac{\partial y_s}{\partial v_s} \frac{\partial v_s}{\partial y_j} \frac{\partial y_j}{\partial v_j} \frac{\partial v_j}{\partial W_{ij}}$$
+
+		Là-dedans, on a déjà à peu près tout résolu à la question précédente :
+
+		- $$\frac{\partial E}{\partial y_s} = (y_s - D)$$, ça n’a pas bougé
+		- $$\frac{\partial y_s}{\partial v_s} = y_s(1 - y_s)$$, ça non plus
+		- $$\frac{\partial v_s}{\partial y_j} = W_{js}$$, même principe que la fois d’avant avec la combinaison linéaire, c’est juste que cette fois comme on dérive par rapport à $$y_j$$ et plus par rapport à $$W_j$$ on a l’autre
+		- $$\frac{\partial y_j}{\partial v_j} = y_j(1 - y_j)$$, toujours la même dérivée de la sigmoïde
+		- $$\frac{\partial v_j}{\partial W_{ij}} = X_i$$, tout comme la combinaison linéaire de la première fois
+
+		Et au final, si on multiplie tout ça :
+
+		$$\frac{\partial E}{\partial W_{ij}} = (y_s - D) y_s(1-y_s) W_{js} y_j(1-y_j) X_i$$

@@ -1,0 +1,24 @@
+licenses:
+    - id: [CC, CC BY, CC-BY]
+      name: Creative Commons — Attribution (CC BY)
+      link: https://creativecommons.org/licenses/by/4.0/
+
+    - id: [CC BY-SA, CC-BY-SA]
+      name: Creative Commons — Attribution — Partage dans les mêmes conditions (CC BY-SA)
+      link: https://creativecommons.org/licenses/by-sa/4.0/
+
+    - id: [CC BY-ND, CC-BY-ND]
+      name: Creative Commons — Attribution — Pas de modification (CC BY-ND)
+      link: https://creativecommons.org/licenses/by-nd/4.0/
+
+    - id: [CC BY-NC, CC-BY-NC]
+      name: Creative Commons — Attribution — Pas d’utilisation commerciale (CC BY-NC)
+      link: https://creativecommons.org/licenses/by-nc/4.0/
+
+    - id: [CC BY-NC-SA, CC-BY-NC-SA]
+      name: Creative Commons — Attribution — Partage dans les mêmes conditions — Pas d’utilisation commerciale (CC BY-NC-SA)
+      link: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+    - id: [CC BY-NC-ND, CC-BY-NC-ND]
+      name: Creative Commons — Attribution — Pas d’utilisation commerciale — Pas de modification (CC BY-NC-ND)
+      link: https://creativecommons.org/licenses/by-nc-nd/4.0/

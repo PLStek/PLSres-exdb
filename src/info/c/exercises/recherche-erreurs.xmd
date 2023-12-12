@@ -1,0 +1,26 @@
+::exercise recherche-erreurs
+::title Recherche d'erreurs dans un programme C
+::tags code C
+::courses IF2 LO21
+::source PL$tek
+::question difficulty=2
+	::text
+		Trouvez les erreurs de programmation dans le code suivant :
+
+		```c//linenos
+		int fonction_quelconque() {
+			int x, y = 2;
+			y *= 16
+			x += 2;
+			x = y / x + x;
+			print("%d, %d\n", x, y);
+		}```
+	::hint 1
+		Il y a 4 erreurs en tout
+	::hint 4
+		Lignes 3, 4, 6, 7
+	::answer
+		- Ligne 3 : Il manque le point-virgule à la fin de la ligne
+		- Ligne 4 : `x` est utilisée (on calcule `x + 2`) alors qu'elle n'est pas initialisée
+		- Ligne 6 : C'est `printf()`, pas `print()`
+		- Ligne 7 : On n'a pas retourné de valeur alors que la fonction doit retourner un `int`
