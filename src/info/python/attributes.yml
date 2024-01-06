@@ -1,8 +1,0 @@
-title: Python
-subtitle: Le fourchelangue pour les informaticiens (on déconne ça c'est Perl)
-relevantCourses: [Branche, Utile]
-themeColor: [1, 98, 252]
-sections:
-    - introduction
-    - reference
-    - recettes
